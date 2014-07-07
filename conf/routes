@@ -6,7 +6,7 @@
 GET        /                    controllers.Application.index
 
 # Roles
-#POST        /api/role                      controllers.RoleController.create
+POST        /api/role                      controllers.RoleController.create
 GET         /api/role/get/:id              controllers.RoleController.findById(id:java.util.UUID)
 GET         /api/role/roles                controllers.RoleController.findAll()
 
