@@ -14,6 +14,4 @@ description:String
                   )
 object Role{
   implicit val roleFmt  = Json.format[Role]
-
-
 }

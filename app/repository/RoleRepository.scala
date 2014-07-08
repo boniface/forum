@@ -17,7 +17,7 @@ import scala.concurrent.Future
 /**
  * Created by hashcode on 2014/07/07.
  */
-class RoleRepository extends CassandraTable[RoleRepository,Role] {
+sealed class RoleRepository extends CassandraTable[RoleRepository,Role] {
   object id extends  UUIDColumn(this) with PartitionKey[UUID]
   object rolename extends StringColumn(this)
   object description extends StringColumn(this)

@@ -1,6 +1,6 @@
 package domain
 
-import java.util.Date
+import java.util.{UUID, Date}
 
 import play.api.libs.json.Json
 
@@ -8,7 +8,7 @@ import play.api.libs.json.Json
  * Created by hashcode on 2014/07/07.
  */
 case class Topic(
-                  id: Option[String] = None,
+                  id: UUID,
                   userId: String,
                   title: String,
                   description: Option[String] = None,
