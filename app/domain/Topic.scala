@@ -2,6 +2,7 @@ package domain
 
 import java.util.{UUID, Date}
 
+import org.joda.time.DateTime
 import play.api.libs.json.Json
 
 /**
@@ -9,11 +10,12 @@ import play.api.libs.json.Json
  */
 case class Topic(
                   id: UUID,
+                  date: DateTime = new DateTime,
                   userId: String,
                   title: String,
-                  description: Option[String] = None,
-                  date: Date = new Date,
-                  seo: Option[String] = None
+                  description: Option[String],
+                  seo: String,
+                  status:String
                   )
 
 object Topic {
