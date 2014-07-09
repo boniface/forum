@@ -3,7 +3,6 @@ package repository
 import com.datastax.driver.core.{ResultSet, Row}
 import com.newzly.phantom.CassandraTable
 import com.newzly.phantom.Implicits._
-import com.newzly.phantom.column.CounterColumn
 import com.newzly.phantom.iteratee.Iteratee
 import com.newzly.phantom.keys.{PartitionKey, PrimaryKey}
 import conf.DataConnection
@@ -45,6 +44,7 @@ object UpVoteRepository extends UpVoteRepository with DataConnection {
   def getVoteBySubjectAndVoterId(subjectId: String, voterId: String): Future[Option[UpVote]] = {
     select.where(_.subjectId eqs subjectId).and(_.voterId eqs voterId).one();
   }
+
   def deleteVoteBySubjectAndVoterId(subjectId: String, voterId: String): Future[ResultSet] = {
     delete.where(_.subjectId eqs subjectId).and(_.voterId eqs voterId).future();
   }

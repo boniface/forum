@@ -4,12 +4,11 @@ import java.util.UUID
 
 import com.datastax.driver.core.{ResultSet, Row}
 import com.newzly.phantom.CassandraTable
-import com.newzly.phantom.column.PrimitiveColumn
-import com.newzly.phantom.iteratee.Iteratee
 import com.newzly.phantom.Implicits._
-import com.newzly.phantom.keys.{PrimaryKey, PartitionKey}
+import com.newzly.phantom.iteratee.Iteratee
+import com.newzly.phantom.keys.{PartitionKey, PrimaryKey}
 import conf.DataConnection
-import domain.{Topic, AbuseReport, DownVote}
+import domain.Topic
 import org.joda.time.DateTime
 
 import scala.concurrent.Future
@@ -34,7 +33,7 @@ sealed class TopicRespository extends CassandraTable[TopicRespository, Topic] {
   object status extends StringColumn(this)
 
   override def fromRow(row: Row): Topic = {
-    Topic(id(row), date(row),userId(row), title(row),description(row),seo(row),status(row))
+    Topic(id(row), date(row), userId(row), title(row), description(row), seo(row), status(row))
   }
 }
 
@@ -52,19 +51,18 @@ object TopicRespository extends TopicRespository with DataConnection {
       .future()
   }
 
-  def getTopicById(id: UUID):Future[Option[Topic]]  = {
+  def getTopicById(id: UUID): Future[Option[Topic]] = {
     select.where(_.id eqs id).one();
 
   }
 
-  def getTopicDate(id: UUID,date: DateTime, voterId: String): Future[Seq[Topic]] = {
+  def getTopicDate(id: UUID, date: DateTime, voterId: String): Future[Seq[Topic]] = {
     select.where(_.id eqs id).fetchEnumerator() run Iteratee.collect()
   }
 
-  def getTopicByUser(id: UUID,date: DateTime, voterId: String): Future[Seq[Topic]] = {
+  def getTopicByUser(id: UUID, date: DateTime, voterId: String): Future[Seq[Topic]] = {
     select.where(_.id eqs id).fetchEnumerator() run Iteratee.collect()
   }
-
 
 
 }

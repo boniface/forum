@@ -45,6 +45,7 @@ object DownVoteRepository extends DownVoteRepository with DataConnection {
   def getVoteBySubjectAndVoterId(subjectId: String, voterId: String): Future[Option[DownVote]] = {
     select.where(_.subjectId eqs subjectId).and(_.voterId eqs voterId).one();
   }
+
   def deleteVoteBySubjectAndVoterId(subjectId: String, voterId: String): Future[ResultSet] = {
     delete.where(_.subjectId eqs subjectId).and(_.voterId eqs voterId).future();
   }

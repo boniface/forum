@@ -1,14 +1,11 @@
 package conf
 
 
-
-
-
-import scala.concurrent._
-
-import com.datastax.driver.core.{Session, Cluster}
+import com.datastax.driver.core.{Cluster, Session}
 import com.newzly.phantom.Implicits._
-import scala.concurrent. { blocking, Future }
+
+import scala.concurrent.{Future, blocking}
+
 /**
  * Created by hashcode on 2014/07/07.
  */
@@ -30,7 +27,7 @@ object DataConnection {
 trait DataConnection {
   self: CassandraTable[_, _] =>
 
-  def createTable(): Future[Unit] ={
+  def createTable(): Future[Unit] = {
     create.future() map (_ => ())
   }
 

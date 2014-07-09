@@ -6,12 +6,13 @@ import models.RoleModel
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 import services.RoleService
+
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
  * Created by hashcode on 2014/07/07.
  */
-object RoleController extends Controller{
+object RoleController extends Controller {
   val service = new RoleService
 
   def create = Action.async(parse.json) {
@@ -29,11 +30,12 @@ object RoleController extends Controller{
       val role = service.findById(id)
       role map (rol => Ok(Json.toJson(rol)))
   }
+
   //
   def findAll() = Action.async {
     request =>
       val roles = service.findAll()
-      roles map (rol =>{
+      roles map (rol => {
         Ok(Json.toJson(rol))
       })
   }

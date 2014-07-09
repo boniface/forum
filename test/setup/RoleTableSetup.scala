@@ -4,21 +4,21 @@ package setup
  * Created by hashcode on 2014/07/07.
  */
 
-import org.scalatest.{GivenWhenThen, FeatureSpec}
+import org.scalatest.{FeatureSpec, GivenWhenThen}
 import repository.RoleRepository
 
-class RoleTableSetup extends FeatureSpec with GivenWhenThen{
+class RoleTableSetup extends FeatureSpec with GivenWhenThen {
 
-  feature(" Set up Role Table"){
+  feature(" Set up Role Table") {
     info("As a Deployer")
     info(" I want to Set up Tables")
     info("So that I can Add Data into the Cassandra")
 
-    scenario(" Create Tables in the Database "){
+    scenario(" Create Tables in the Database ") {
       Given("Given a Connection to the Database Through a Respository")
-       val roletable = RoleRepository
+      val roletable = RoleRepository
       When(" When Create method is called ")
-       roletable.createTable()
+      roletable.createTable()
       Then(" The The Table is Created")
 
     }

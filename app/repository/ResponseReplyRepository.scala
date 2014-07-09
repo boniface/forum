@@ -4,13 +4,12 @@ import java.util.UUID
 
 import com.datastax.driver.core.{ResultSet, Row}
 import com.newzly.phantom.CassandraTable
-import com.newzly.phantom.Implicits.{UUIDColumn, StringColumn}
-import com.newzly.phantom.column.{DateTimeColumn, TimeUUIDColumn, PrimitiveColumn}
-import com.newzly.phantom.iteratee.Iteratee
 import com.newzly.phantom.Implicits._
-import com.newzly.phantom.keys.{PrimaryKey, PartitionKey}
+import com.newzly.phantom.column.{DateTimeColumn, TimeUUIDColumn}
+import com.newzly.phantom.iteratee.Iteratee
+import com.newzly.phantom.keys.{PartitionKey, PrimaryKey}
 import conf.DataConnection
-import domain.{ReplyResponse, DownVote}
+import domain.ReplyResponse
 
 import scala.concurrent.Future
 
@@ -34,7 +33,7 @@ sealed class ResponseReplyRepository extends CassandraTable[ResponseReplyReposit
   object ipaddress extends StringColumn(this)
 
   override def fromRow(row: Row): ReplyResponse = {
-    ReplyResponse(responseId(row),id(row),date(row),comment(row),userId(row),seo(row), ipaddress(row))
+    ReplyResponse(responseId(row), id(row), date(row), comment(row), userId(row), seo(row), ipaddress(row))
   }
 }
 

@@ -1,17 +1,5 @@
 package repository
 
-import com.datastax.driver.core.{ResultSet, Row}
-import com.newzly.phantom.CassandraTable
-import com.newzly.phantom.Implicits.{OptionalBooleanColumn, OptionalStringColumn, BooleanColumn, StringColumn}
-import com.newzly.phantom.column.PrimitiveColumn
-import com.newzly.phantom.iteratee.Iteratee
-import com.newzly.phantom.keys.{PrimaryKey, PartitionKey}
-import conf.DataConnection
-import domain.DownVote
-
-
-import scala.concurrent.Future
-
 /**
  * Created by hashcode on 2014/07/09.
  */
@@ -19,12 +7,11 @@ import scala.concurrent.Future
 
 import com.datastax.driver.core.{ResultSet, Row}
 import com.newzly.phantom.CassandraTable
-import com.newzly.phantom.column.PrimitiveColumn
-import com.newzly.phantom.iteratee.Iteratee
 import com.newzly.phantom.Implicits._
-import com.newzly.phantom.keys.{PrimaryKey, PartitionKey}
+import com.newzly.phantom.iteratee.Iteratee
+import com.newzly.phantom.keys.{PartitionKey, PrimaryKey}
 import conf.DataConnection
-import domain.{AbuseReport, DownVote}
+import domain.AbuseReport
 
 import scala.concurrent.Future
 
@@ -40,9 +27,9 @@ sealed class AbuseReportRespository extends CassandraTable[AbuseReportRespositor
   object comment extends OptionalStringColumn(this)
 
   override def fromRow(row: Row): AbuseReport = {
-    AbuseReport(      topicId(row),
-                      comment(row),
-                      userId(row))
+    AbuseReport(topicId(row),
+      comment(row),
+      userId(row))
   }
 }
 

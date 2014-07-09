@@ -2,6 +2,7 @@ package services
 
 import domain.{DownVote, UpVote}
 import repository.{DownVoteRepository, UpVoteRepository}
+
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
@@ -27,7 +28,7 @@ class VoteService {
       )
   }
 
-  def castDownVote(vote:DownVote) = {
+  def castDownVote(vote: DownVote) = {
     val checkvote = DownVoteRepository.getVoteBySubjectAndVoterId(vote.subjectId, vote.voterId)
     checkvote map (voteresult => {
       voteresult match {
